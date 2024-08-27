@@ -1,0 +1,94 @@
+@use 'extends';
+@use 'const';
+@use 'mixins';
+
+.folders {
+    height: 100%;
+
+    .s_country {
+        border: 1px solid grey;
+        height: 40px;
+        width: 200px;
+        margin: 20px;
+        outline: none;
+        padding-left: 20px;
+    }
+
+    .main {
+        @include mixins.flex(flex-start, flex-start, row);
+        flex-wrap: wrap;
+        height: 55%;
+        padding-bottom: 20px;
+        overflow: scroll;
+
+        .folder {
+            @include mixins.flex(center, center, column);
+            border: 1px solid grey;
+            height: 100px;
+            width: 100px;
+            margin-top: 20px;
+            margin-left: 5%;
+            cursor: pointer;
+
+            p {
+                font-size: 14px;
+            }
+
+            .icon {
+                font-size: 40px;
+                color: const.$light_orange_theme;
+
+            }
+        }
+
+        .create_folder {
+            border: 1px solid const.$light_orange_theme;
+        }
+    }
+
+    .folder_list {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: const.$over_lay;
+        @include mixins.flex(center, center, row);
+
+        .main {
+            border: 1px solid grey;
+            width: 70%;
+            height: 80%;
+            background-color: white;
+
+            .header {
+                justify-content: flex-start;
+                width: 100%;
+                gap: 20px;
+
+                p {
+                    font-weight: 500;
+                    font-size: 15px;
+                }
+
+                .button_d {
+                    border: 1px solid const.$blue_theme;
+                    font-weight: 500;
+                    padding: 10px;
+                    font-size: 13px;
+                    width: 80px;
+                    text-align: center;
+                    margin-left: 5%;
+                    cursor: pointer;
+                }
+            }
+
+            .body {
+                border: 1px solid grey;
+                height: 85%;
+                width: 100%;
+                margin-top: 25px;
+            }
+        }
+    }
+}

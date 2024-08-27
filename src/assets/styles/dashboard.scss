@@ -1,0 +1,329 @@
+@use 'mixins';
+@use 'extends';
+@use 'const';
+
+.dashboard {
+    @include mixins.flex(center, center, column);
+    height: 95%;
+
+    .cardHolder {
+        width: 100%;
+        height: 100%;
+        @include mixins.flex(space-between, center, row);
+        overflow: hidden;
+        // color: orangered;
+
+        .card {
+            height: 93%;
+            overflow: hidden;
+            width: 48%;
+            background: white;
+            border-radius: 5px;
+            text-align: center;
+            padding-top: 2%;
+            border: 1px solid lightgrey;
+
+            .card_title {
+                @include mixins.flex(flex-start, center, row);
+                font-weight: bold;
+                padding-left: 5%;
+
+                p {
+                    margin-left: 20px;
+                }
+            }
+            .separator{
+                border-right: 2px solid const.$blue_theme;
+                border-radius: 0;
+                margin-left: 30px;
+                height: 17px;
+            }
+            .add{
+                font-size: 15px;
+                color: grey;
+                font-weight: 500;
+                margin-left: 3%;
+                border: 1px solid grey;
+                cursor: pointer;
+            }
+
+            .cardImage {
+                width: 35%;
+                margin-top: 3%;
+            }
+        }
+
+        .to_do {
+
+            .e_row {
+
+                .del{
+                    font-size: 20px;
+                    color: grey;
+                    margin-left: 100%;
+                }
+                .e_k {
+                    width: 40%;
+                }
+
+                .e_k1 {
+                    width: 20%;
+                }
+
+                .e_k2 {
+                    width: 15%;
+                }
+            }
+        }
+    }
+
+    .footerHolder {
+        width: 100%;
+        background: white;
+        border: 1px solid lightgrey;
+        margin-top: 3%;
+
+        .wedge {
+            width: 0px;
+            height: 100px;
+            border-left: 250px solid const.$blue_theme;
+        }
+
+        .expense {
+            @include mixins.flex('flex-start', center, row);
+
+            .lister {
+                @include mixins.flex(center, flex-start, column);
+                font-size: 24px;
+                font-weight: bold;
+                width: 20%;
+                text-align: left;
+                margin-right: 5%;
+                color: const.$txt_grey_c;
+
+                .wed {
+                    @extend %avatar_case;
+                    background: const.$over_lay;
+                }
+
+                .mon {
+                    font-size: 22px;
+                }
+
+                .desc {
+                    font-size: 12px;
+                }
+
+                .curr {
+                    font-size: 10px;
+                }
+            }
+
+            .first {
+                margin-left: -15%;
+                color: white;
+                flex-direction: row;
+
+                p {
+                    margin-left: 20px;
+                    font-size: 18px;
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+.bulk_upload {
+    @include mixins.flex(center, center, column);
+    height: 100%;
+
+
+    label {
+        width: 100%;
+        @include mixins.flex(center, center, row);
+        cursor: pointer;
+
+    }
+
+    input {
+        display: none;
+    }
+
+    .bulk_input {
+        width: 50%;
+        height: 200px;
+        background-color: white;
+        border: 2px dashed grey;
+
+        @include mixins.flex(center, center, column);
+
+
+        .uploadfile {
+            font-size: 100px;
+            color: grey;
+        }
+
+        .su {
+            font-size: 12px;
+        }
+
+    }
+
+    .bulk_lister {
+        height: 390px;
+        min-width: 90%;
+        background: white;
+        overflow: scroll;
+        padding: 30px;
+        border: 1px solid rgba(128, 128, 128, 0.349);
+
+        .hd {
+            @include mixins.flex(flex-start, center, row);
+            gap: 30px;
+            position: fixed;
+            background: white;
+            width: 70%;
+            height: 50px;
+            padding-top: 20px;
+            margin-top: -30px;
+            font-size: 13px;
+            z-index: 2;
+
+            .s_butt {
+                background-color: const.$blue_theme;
+                color: white;
+                padding: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                cursor: pointer;
+            }
+
+            .sve {
+                border: 1px solid const.$blue_theme;
+                background-color: transparent;
+                color: black;
+            }
+
+            .upload_label {
+                width: 100px;
+                cursor: pointer;
+            }
+
+            .d {
+                @include mixins.flex(flex-start, center, row);
+
+            }
+
+            .icon {
+                color: rgb(85, 85, 85);
+            }
+        }
+
+        .lister {
+            padding-left: 2%;
+            padding-top: 50px;
+
+
+            .list:nth-child(1) {
+                margin-top: 20px;
+                position: fixed;
+                background-color: white;
+                margin-top: -20px;
+                padding-top: 20px;
+                font-weight: 500;
+                font-size: 36px;
+            }
+
+            .list:nth-child(2) {
+                margin-top: 25px;
+
+            }
+
+            .list {
+                @include mixins.flex(flex-start, center, row);
+                padding-top: 5px;
+                padding-bottom: 5px;
+
+                p {
+                    font-size: 13px;
+                    overflow: hidden;
+                    text-wrap: nowrap;
+                }
+
+                p:nth-child(1) {
+                    width: 50px;
+                }
+
+                p:nth-child(2) {
+                    width: 80px;
+                }
+
+                p:nth-child(3) {
+                    width: 50px;
+                }
+
+                p:nth-child(4) {
+                    width: 70px;
+                }
+
+                p:nth-child(5) {
+                    width: 100px;
+                }
+
+                p:nth-child(6) {
+                    width: 60px;
+                }
+
+                p:nth-child(7) {
+                    width: 60px;
+                }
+
+                p:nth-child(8) {
+                    width: 60px;
+                }
+
+                p:nth-child(9) {
+                    width: 90px;
+                }
+
+                p:nth-child(10) {
+                    width: 90px;
+                }
+
+                p:nth-child(11) {
+                    width: 90px;
+                }
+                p:nth-child(12){
+                    width: 100px;
+                }
+                .butts{
+                margin-left: 10px;
+                @include mixins.flex(center, center, row)
+                    // border: 2px solid red;
+                }
+
+            }
+
+            .list:nth-child(1) {
+                margin-top: 20px;
+                position: fixed;
+                background-color: white;
+                width: 70%;
+                margin-top: -20px;
+                padding-top: 20px;
+                font-weight: 500;
+                font-size: 36px;
+            }
+
+
+        }
+    }
+
+    .temp_download {
+        font-size: 12px;
+        margin-top: 10px;
+
+    }
+
+}

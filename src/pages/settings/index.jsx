@@ -1,0 +1,96 @@
+import { Button, Switch } from '@mui/material'
+import '../../assets/styles/settings.scss'
+import { AddOutlined, SearchOutlined } from '@mui/icons-material'
+import AddUser from './addUser'
+import { useGiraf } from '../../giraff'
+import EditUser from './editUser'
+import { useEffect, useState } from 'react'
+import usePushMessage from '../../hooks/pushmessage'
+import MessageBox from '../../components/message'
+import Loading from '../../components/loading'
+import useGetApi from '../../hooks/getapi'
+import appConfig from '../../config'
+import { shortenWord } from '../../BFF/utils'
+
+const Settings = () => {
+    const { gHead, addGHead } = useGiraf()
+    const { messageType, response, pushMessage } = usePushMessage()
+    const [loading, setLoading] = useState(false)
+    const [users, setUsers] = useState()
+    const { actionRequest } = useGetApi()
+    const [refresh, setRefresh] = useState(false)
+
+    useEffect(() => {
+        setLoading(true)
+        actionRequest({ endPoint: `${appConfig.api}settings/users` }).then((res) => {
+            console.log(res)
+            setUsers(res.data)
+        }).catch((err) => {
+            pushMessage(err.message, 'error')
+        }).finally(() => {
+            setLoading(false)
+        })
+        return setRefresh(false)
+    }, [refresh])
+
+    return (
+        <div className='settings'>
+            {response && <MessageBox type={messageType} txt={response} />}
+            {loading && <Loading />}
+
+            <div className='header'>
+                {gHead.addUser === true && <AddUser />}
+                {gHead.edit_user === true && <EditUser />}
+                <h2>Users</h2>
+                <div className='button' onClick={() => {
+                    addGHead('addUser', true)
+                }}>
+                    <AddOutlined size={13} />
+                    <p>Add Users</p>
+                </div>
+            </div>
+            <div className='filter'>
+                <input placeholder='search by name' />
+
+                <SearchOutlined className="search_butt" size={1} />
+            </div>
+            <div className="lister">
+                <div className="lister_header">
+                    <p>User</p>
+                    <p>Groups</p>
+                    <p>Roles</p>
+                    <p>Status</p>
+                </div>
+                {
+                    users && users.map(l => {
+                        return (
+
+                            <div key={l.id} className="lister_row">
+
+                                <div className="avator" onClick={() => {
+                                    addGHead('edit_user', true)
+                                    addGHead('focused_user', l)
+                                }}>
+                                    <div className="init">{`${l.firstName[0]}${l.lastName[0]}`}</div>
+                                    <div className="desc">
+                                        <p>{`${l.firstName} ${l.lastName}`}</p>
+                                        <p className='greyed'>{l.email}</p>
+                                    </div>
+                                </div>
+                                <div className='g'>Open Capital</div>
+                                <div className='r'>{shortenWord([...(new Set(l.UserRoles.map(l => l.Role.name)))].join(', '), 25)}</div>
+                                <div className='s' onClick={(e) => {
+                                    console.log('')
+                                }}>
+                                    <Switch checked={l.status === 'ACTIVE'} />
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
+}
+
+export default Settings
