@@ -171,7 +171,7 @@ const DashboardDefault = () => {
                         <FaMoneyBills />
                         <p>Spendings</p>
                     </div>
-                    {gHead.user_expenses
+                    {gHead.user_expenses && gHead.user_expenses.length != 0
                         ?
                         <div className="e_lister">
                             <div className="e_row e_header">
