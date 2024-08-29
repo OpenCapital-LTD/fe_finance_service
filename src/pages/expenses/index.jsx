@@ -76,13 +76,13 @@ const Expense = () => {
                     backgroundColor: categ === 'todo' ? '#c47c1018' : 'transparent',
                     color: categ === 'todo' ? '#2D3E50' : 'grey'
                 }}>TO DO</div>
-                <div onClick={() => {
+                {(gHead.user_role.includes('APPROVER')) && <div onClick={() => {
                     switchCateg('folder')
 
                 }} className='categ_act categ_act_focused' style={{
                     backgroundColor: categ === 'folder' ? '#c47c1018' : 'transparent',
                     color: categ === 'folder' ? '#2D3E50' : 'grey'
-                }}>FOLDERS</div>
+                }}>FOLDERS</div>}
 
             </div>
             <p className='categ_act filter'>+ Add Filter</p>
