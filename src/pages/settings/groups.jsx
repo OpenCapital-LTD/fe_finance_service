@@ -35,9 +35,8 @@ const Groups = () => {
         }).finally(() => {
             setLoading(false)
         })
-        return setRefresh(false)
-    }, [refresh])
-
+        return addGHead("ref_countries", false)
+    }, [gHead.ref_countries])
 
     const updateOffice = () => {
         if (!name || !office) return pushMessage("missing name or office")
@@ -53,7 +52,7 @@ const Groups = () => {
             }
         }).then((res) => {
             pushMessage(res.message, 'success')
-            setRefresh(true)
+            addGHead("ref_countries", true)
             addGHead("editGroup", false)
 
 

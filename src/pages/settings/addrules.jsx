@@ -33,6 +33,7 @@ const AddExpenseRules = () => {
         }).then(res => {
             pushMessage(res.message, 'success')
             addGHead('addRule', false)
+            addGHead('ref_rle', true)
         }).catch(err => {
             pushMessage(err.message, 'error')
         }).finally(() => {

@@ -33,6 +33,7 @@ const AddGroup = () => {
         }).then((res) => {
             pushMessage(res.message, 'success')
             addGHead('addGroup', false)
+            addGHead("ref_countries", true)
 
         }).catch((err) => {
             console.log(err)

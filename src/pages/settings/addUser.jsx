@@ -65,6 +65,7 @@ const AddUser = () => {
         }).then(res => {
             pushMessage(res.message, 'success')
             addGHead('addUser', false)
+            addGHead('ref_users', true)
         }).catch(err => {
             pushMessage(err.message, 'error')
         }).finally(() => {

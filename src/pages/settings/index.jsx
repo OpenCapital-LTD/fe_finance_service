@@ -30,9 +30,8 @@ const Settings = () => {
         }).finally(() => {
             setLoading(false)
         })
-        return setRefresh(false)
-    }, [refresh])
-
+        return addGHead("ref_users", false)
+    }, [gHead.ref_users])
     return (
         <div className='settings'>
             {response && <MessageBox type={messageType} txt={response} />}

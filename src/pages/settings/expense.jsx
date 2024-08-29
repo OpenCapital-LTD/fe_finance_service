@@ -43,8 +43,9 @@ const ExpenseRules = () => {
         }).finally(() => {
             setLoading(false)
         })
-        return setRefresh(false)
-    }, [refresh])
+        return addGHead("ref_rle", false)
+    }, [gHead.ref_rle])
+
     return (
         <div className="expense_rules">
             {gHead.addRule && <AddExpenseRules />}

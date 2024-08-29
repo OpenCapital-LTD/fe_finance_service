@@ -28,6 +28,7 @@ const AddRole = () => {
         }).then(res => {
             pushMessage(res.message, 'success')
             addGHead('addRole', false)
+            addGHead("ref_roles", false)
         }).catch(err => {
             pushMessage(err.message, 'error')
         }).finally(() => {

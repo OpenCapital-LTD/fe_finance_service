@@ -38,7 +38,9 @@ const Roles = () => {
         }).finally(() => {
             setLoading(false)
         })
-    }, [])
+
+        return addGHead("ref_roles", false)
+    }, [gHead.ref_roles])
 
     const postRole = () => {
         setLoading(true)

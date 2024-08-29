@@ -52,6 +52,7 @@ const AddCategories = () => {
             console.log(res)
             pushMessage(res.message, 'success')
             addGHead('addCateg', false)
+            addGHead("ref_ctg", true)
 
         }).catch((err) => {
             console.log(err)

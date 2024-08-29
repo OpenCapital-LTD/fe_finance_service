@@ -35,7 +35,8 @@ const Categories = () => {
         }).finally(() => {
             setLoading(false)
         })
-    }, [])
+        return addGHead("ref_ctg", false)
+    }, [gHead.ref_ctg])
 
     useEffect(() => {
         setLoading(true)
@@ -49,8 +50,8 @@ const Categories = () => {
         }).finally(() => {
             setLoading(false)
         })
-        return setRefresh(false)
-    }, [refresh])
+        return addGHead("ref_ctg", false)
+    }, [gHead.ref_ctg])
 
 
     return (
