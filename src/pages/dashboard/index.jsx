@@ -35,6 +35,7 @@ const DashboardDefault = () => {
 
     useEffect(() => {
         addGHead('toolbar', true)
+        addGHead("header", true)
     }, [])
 
     useEffect(() => {
@@ -69,6 +70,10 @@ const DashboardDefault = () => {
             y: e.clientY
         })
     }
+    useEffect(() => {
+        addGHead("header", true)
+
+    }, [])
     return (
         <div className="dashboard">
             {response && <MessageBox type={messageType} txt={response} />}
@@ -171,7 +176,9 @@ const DashboardDefault = () => {
                         <div className="e_lister">
                             <div className="e_row e_header">
                                 <p className="e_ind"></p>
-                                <p className="e_d">Amount</p>
+                                <p className="e_d" style={{
+                                    marginLeft: '2%'
+                                }}>Amount</p>
                                 <p className="e_d">Invoice</p>
                                 <p className="e_d">Time Code</p>
                                 <p className="e_d">Category</p>
@@ -206,15 +213,16 @@ const DashboardDefault = () => {
                                                 addGHead('filer', true)
                                             }}>
                                                 <p className="e_ind" style={{
-                                                    background: l.status == 'APPROVED' || l.status == 'REIMBURSED' ? 'green' : l.status == 'DRAFT' ? '#ca7300' : l.status == 'REJECTED' ? 'red' : 'grey'
+                                                    background: l.status == 'APPROVED' || l.status == 'REIMBURSED' ? 'green' : l.status == 'DRAFT' ? 'grey' : l.status == 'REJECTED' ? 'red' : '#ca7300'
+                                                    // background: l.status == 'APPROVED' || l.status == 'REIMBURSED' ? 'green' : l.status == 'DRAFT' ? '#ca7300' : l.status == 'REJECTED' ? 'red' : 'grey'
                                                 }}></p>
                                                 <p className="e_d"><span style={{
                                                     fontSize: '10px'
                                                 }}>KES</span> {l.amount || '0'}</p>
-                                                <p className="e_d">{l.invoice}</p>
+                                                <p className="e_d">{shortenWord(l.invoice + "ADSFASD", 8)}</p>
                                                 <p className="e_d">{shortenWord(l.time_code || '', 11)}</p>
                                                 <p className="e_d">{l.category}</p>
-                                                <p className="e_d">{l.status.toLowerCase()}</p>
+                                                <p className="e_d">{shortenWord(l.status.toLowerCase(), 5)}</p>
                                                 <p className="e_d">{l.expense_date}</p>
                                             </div>
                                         </Tooltip>
@@ -249,7 +257,7 @@ const DashboardDefault = () => {
                     </div>
                     <div className="lister">
                         <p className="desc">Submitted</p>
-                        <p className="mon"><span className="curr">KES</span> {gHead.user_expenses ? gHead.user_expenses.filter(l => {
+                        <p className="mon"><span className="curr">KES</span> {(gHead.user_expenses && gHead.user_expenses.length > 0) ? gHead.user_expenses.filter(l => {
                             if (!l.amount || l.status == 'DRAFT') return false
                             return true
                         }).reduce((a, b) => parseInt(a) + parseInt(b?.amount), 0) : '0.00'}</p>
@@ -258,20 +266,20 @@ const DashboardDefault = () => {
 
                     <div className="lister">
                         <p className="desc">Advances</p>
-                        <p className="mon"><span className="curr">KES</span> 0.00</p>
+                        <p className="mon"><span className="curr">KES</span> 0</p>
                     </div>
                     <div className="lister">
                         <p className="desc">Pending Approval</p>
-                        <p className="mon"><span className="curr">KES</span> 0.00</p>
+                        <p className="mon"><span className="curr">KES</span> {(gHead.user_expenses && gHead.user_expenses.length > 0) ? gHead.user_expenses.filter(l => l.status == 'PENDING' || l.status == 'FORWARDED').reduce((a, b) => parseInt(a) + parseInt(b?.amount), 0) : '0.00'}</p>
                     </div>
                     <div className="lister">
                         <p className="desc">Approved</p>
-                        <p className="mon"><span className="curr">KES</span> 0.00</p>
+                        <p className="mon"><span className="curr">KES</span> {(gHead.user_expenses && gHead.user_expenses.length > 0) ? gHead.user_expenses.filter(l => l.status == 'APPROVED').reduce((a, b) => parseInt(a) + parseInt(b?.amount), 0) : '0.00'}</p>
                     </div>
 
                     <div className="lister">
                         <p className="desc">Reimbursed</p>
-                        <p className="mon"><span className="curr">KES</span> 0.00</p>
+                        <p className="mon"><span className="curr">KES</span> {(gHead.user_expenses && gHead.user_expenses.length > 0) ? gHead.user_expenses.filter(l => l.status == 'REIMBURSED').reduce((a, b) => parseInt(a) + parseInt(b?.amount), 0) : '0.00'}</p>
                         {/* currency should be country office */}
                     </div>
                 </div>

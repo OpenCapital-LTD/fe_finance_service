@@ -19,17 +19,17 @@ const menuItems = {
     title:'Expense',
     url:'/expense',
     icon:<TbGraph size={23}/>
-  }
+  },{
+    title:'Receipts',
+    url:'/reciepts',
+    icon:<TbReceipt size={23}/>
+  } 
   ,{
     title:'Reports',
     url:'/expense',
     icon:<TbReportSearch size={23}/>
   } 
-  ,{
-    title:'Receipts',
-    url:'/reciepts',
-    icon:<TbReceipt size={23}/>
-  } 
+  
   ,{
     title:'Settings',
     url:'/settings/users',

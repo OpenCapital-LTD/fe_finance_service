@@ -15,7 +15,7 @@ import View from '../reciepts/view'
 
 const Filler = () => {
     const { gHead, addGHead } = useGiraf()
-    const [country, setCountry] = useState("")
+    const [country, setCountry] = useState(gHead.user?.country)
     const [image, setImage] = useState()
     const [showProject, setShowProject] = useState(false)
     const [code, setCode] = useState('')
@@ -27,8 +27,8 @@ const Filler = () => {
     const [limit, setLimit] = useState()
     const [amount, setAmount] = useState()
     const [focusedCountry, setFocusedCountry] = useState('')
-    const [rp_month, setRpMonth] = useState("")
-    const [rp_year, setRpYear] = useState("")
+    const [rp_month, setRpMonth] = useState(getDate(new Date()).month)
+    const [rp_year, setRpYear] = useState(new Date().getFullYear())
     const [merchant, setMarchant] = useState()
     const [expense_date, setExpenseDate] = useState()
     const [invoice, setInvoice] = useState()
@@ -57,6 +57,13 @@ const Filler = () => {
     useEffect(() => {
         addGHead('toolbar', true)
         setLoading(true)
+        let d = gHead.countries?.find(l => l.office_id == gHead.user?.country)
+        console.log(d)
+        console.log('get values : ', gHead.categories)
+
+        setErrorList(prev => prev.filter(u => u != 'country'))
+        setFocusedCountry(d)
+
         actionRequest({ endPoint: `${appConfig.api}folders` }).then((res) => {
             setFolders(res.data)
         }).catch((err) => {
@@ -99,6 +106,7 @@ const Filler = () => {
         reader.onload = () => {
             setPImage(reader.result.split('base64,')[1])
             setImage(reader.result)
+            setErrorList(prev => prev.filter(u => u != 'image'))
         }
     }
 
@@ -113,7 +121,34 @@ const Filler = () => {
         return months
     }
     const uploadRecord = () => {
-        if (!rp_month || !rp_year || !image || !country || !merchant || !category || !expense_date || !amount || !invoice || !code || !description) return pushMessage('kindly provide all the fields')
+        if (!rp_month || !rp_year || !image || !country || !merchant || !category || !expense_date || !amount || !invoice || !code || !description) {
+            const params = {
+                rp_month,
+                rp_year,
+                code,
+                country,
+                marchant: merchant,
+                category,
+                date: expense_date,
+                amount,
+                invoice,
+                description,
+                pin,
+                id: recordId,
+                etr,
+                image
+            }
+            const keys = Object.keys(params)
+            keys.map(l => {
+                if (!params[l]) {
+                    setErrorList(prev => {
+                        let d = [...prev, l]
+                        return d
+                    })
+                }
+            })
+            return pushMessage('kindly provide all the fields')
+        }
         if (focusedCountry?.name?.toLocaleLowerCase().includes('kenya') && (!pin || !etr)) return pushMessage('you must provide expense etr and pin number')
         setLoading(true)
         const report_period = `${rp_month}, ${rp_year}`
@@ -160,6 +195,7 @@ const Filler = () => {
 
         }).catch((err) => {
             console.log(err)
+
             pushMessage(err.message, 'error')
         }).finally(() => {
             setLoading(false)
@@ -241,9 +277,9 @@ const Filler = () => {
         setDisabled(d[25])
         console.log(d[14])
         if (d[3]) {
-            console.log(d[3])
-            let c = gHead.countries?.find(l => l.id == d[3])
-            console.log('c here', c)
+            console.log('one passed : ',d[3])
+            let c = gHead.countries?.find(l => l.office_id == d[3])
+            console.log("here is here country : ",gHead.countries)
             setFocusedCountry(c)
         }
         if (d[9]) {
@@ -323,6 +359,7 @@ const Filler = () => {
         }).then((res) => {
             pushMessage(res.message, 'success')
             addGHead('filer', false)
+            addGHead('expense_ref', true)
         }).catch((err) => {
             pushMessage(err.message, 'error')
         }).finally(() => {
@@ -474,7 +511,7 @@ const Filler = () => {
                                 <option>~ select folder ~</option>
                                 {folders.map(l => {
                                     return (
-                                        <option value={l.id}>{l.country}, {l.month} {l.year}</option>
+                                        <option value={l.id}>{l.country}, {l.name}</option>
                                     )
                                 })}
                             </select>
@@ -526,7 +563,7 @@ const Filler = () => {
                             <p className='atom_label'>Reporting Period</p>
                             <div className='atom_splitter input_box'>
 
-                                <select disabled={disabled} className='atom_input date_select' style={{
+                                <select disabled={true} className='atom_input date_select' style={{
                                     border: errList.includes('month') && '1px solid orangered'
                                 }} onChange={(e) => {
                                     setErrorList(prev => prev.filter(u => u != 'month'))
@@ -539,7 +576,7 @@ const Filler = () => {
                                         )
                                     })}
                                 </select>
-                                <select disabled={disabled} className='atom_input date_select' style={{
+                                <select disabled={true} className='atom_input date_select' style={{
                                     border: errList.includes('year') && '1px solid orangered'
                                 }} onChange={(e) => {
                                     setErrorList(prev => prev.filter(u => u != 'year'))
@@ -553,7 +590,7 @@ const Filler = () => {
                         </div>
                         <div className='input_atom '>
                             <p className='atom_label'>Country</p>
-                            <select disabled={disabled} className='atom_input select_text' style={{
+                            <select disabled={true} className='atom_input select_text' style={{
                                 border: errList.includes('country') && '1px solid orangered'
                             }} placeholder='placeholder' onChange={(e) => {
                                 const value = e.target.value
@@ -612,7 +649,8 @@ const Filler = () => {
                                 if (s > now) return pushMessage('expense too early')
                                 console.log(100 * 60 * 60 * 24 * 14)
                                 console.log(now.getTime() - s.getTime())
-                                if (now.getTime() - s.getTime() > (1000 * 60 * 60 * 24 * 14)) return pushMessage('expense must not be more than 2 weeks old')
+
+                                if (now.getMonth() - s.getMonth() > 2) return pushMessage('expense must not be more than 3 months old')
                                 setErrorList(prev => prev.filter(u => u != 'date'))
                                 setExpenseDate(e.target.value)
                             }} style={{
@@ -736,6 +774,8 @@ const Filler = () => {
                                 backgroundSize: 'contain',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
+                                border: errList.includes('image') && '1px solid orangered'
+
                             }}
                                 onClick={() => {
                                     if (!disabled) return

@@ -15,9 +15,10 @@ const ThemeRoutes = () => {
     const [logedIn, setLogedIn] = useState(false)
     const { gHead, addGHead } = useGiraf()
     const [loading, setLoading] = useState(true)
-     useEffect(() => {
+    useEffect(() => {
         addGHead("header", true)
         addGHead("toolbar", true)
+        console.log('')
         const token = Cookies.get('auth_token')
         if (!token) return setLoading(false)
         addGHead('logedIn', true)
@@ -27,7 +28,7 @@ const ThemeRoutes = () => {
         setLoading(false)
     }, [])
 
-    
+
     if (loading) return (
         <div style={{
             fontSize: '30px',

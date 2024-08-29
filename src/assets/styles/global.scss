@@ -124,7 +124,13 @@ body {
         }
 
         .e_d:nth-child(6) {
-            width: 15%;
+            width: 10%;
+        }
+        .e_d:nth-child(7) {
+            width: 10%;
+        }
+        .e_d:nth-child(8) {
+            width: 5%;
         }
 
     }
@@ -161,25 +167,104 @@ body {
     .e_header:hover {
         background-color: white;
     }
-    .hover_menu{
-        border: 1px solid lightgrey;
-        background-color: white;
-        position: absolute;
-        margin-left: 2%;
-        padding: 5px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        text-align: left;
-        z-index: 20;
+  
+}
+.hover_menu{
+    border: 1px solid lightgrey;
+    background-color: white;
+    position: absolute;
+    margin-left: 2%;
+    padding: 5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+    z-index: 20;
 
-        p{
-            border-radius: 5px;
-            padding: 5px;
+    p{
+        border-radius: 5px;
+        padding: 5px;
+        cursor: pointer;
+        width: 100px;
+    }   
+    p:hover{
+        background-color: rgba(207, 207, 207, 0.459);
+    }
+}
+
+
+.due_box {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: 20;
+    @include mixins.flex(center, center, column);
+
+    .holder {
+        border: 1px solid grey;
+        @include mixins.flex(flex-start, center, column);
+        height: fit-content;
+        padding-bottom: 3%;
+        background-color: white;
+        width: 40%;
+        margin-left: 5%;
+
+        .question {
+            @include mixins.flex(flex-start, center, row);
+            width: 50%;
+            margin-left: 25%;
+            gap: 20%;
+
+        }
+
+        label {
+            @include mixins.flex(flex-start, center, row);
             cursor: pointer;
-            width: 100px;
-        }   
-        p:hover{
-            background-color: rgba(207, 207, 207, 0.459);
+            gap: 20%;
+
+            input {
+                cursor: pointer;
+            }
+        }
+
+        p {
+            cursor: pointer;
+
+        }
+
+        .date {
+
+            margin-top: 20px;
+            width: 40%;
+
+            label {
+                @include mixins.flex(center, flex-start, column);
+
+                p {
+                    font-size: 12px;
+                }
+
+                input {
+                    outline: none;
+                    border: 1px solid grey;
+                    padding: 10px;
+                    width: 100%;
+                }
+            }
+        }
+
+        .butt {
+            border: 1px solid const.$blue_theme;
+            padding: 10px;
+            padding-left: 25px;
+            padding-right: 25px;
+            margin-top: 20px;
+            font-weight: 500;
+            cursor: pointer;
+
         }
     }
 }

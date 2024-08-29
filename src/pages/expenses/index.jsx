@@ -101,7 +101,7 @@ const Expense = () => {
                         <p className="e_d">Date</p>
                     </div>
                     {expenses.filter(l => {
-                        if (categ == 'todo') return l.status === 'PENDING'
+                        if (categ == 'todo') return l.status === 'PENDING' && !l.FolderItem
                         return true
                     }).sort((a, b) => (new Date(b.log_date).getTime()) - (new Date(a.log_date).getTime())).map(l => {
                         console.log()
@@ -133,7 +133,7 @@ const Expense = () => {
                                         addGHead('filer', true)
                                     }}>
                                         <p className="e_ind" style={{
-                                            background: l.status == 'APPROVED' || l.status == 'REIMBURSED' ? 'green' : l.status == 'DRAFT' ? '#ca7300' : l.status == 'REJECTED' ? 'red' : 'grey'
+                                            background: l.status == 'APPROVED' || l.status == 'REIMBURSED' ? 'green' : l.status == 'DRAFT' ? 'grey' : l.status == 'REJECTED' ? 'red' : '#ca7300'
                                         }}></p>
                                         <p className="e_d"><span style={{
                                             fontSize: '10px'

@@ -8,10 +8,15 @@
     .s_country {
         border: 1px solid grey;
         height: 40px;
-        width: 200px;
+        width: 150px;
         margin: 20px;
+        margin-right: 0px;
         outline: none;
         padding-left: 20px;
+    }
+
+    .m {
+        width: 100px;
     }
 
     .main {
@@ -31,7 +36,7 @@
             cursor: pointer;
 
             p {
-                font-size: 14px;
+                font-size: 12px;
             }
 
             .icon {
@@ -64,7 +69,6 @@
             .header {
                 justify-content: flex-start;
                 width: 100%;
-                gap: 20px;
 
                 p {
                     font-weight: 500;
@@ -75,19 +79,61 @@
                     border: 1px solid const.$blue_theme;
                     font-weight: 500;
                     padding: 10px;
+                    user-select: none;
                     font-size: 13px;
-                    width: 80px;
+                    min-width: 80px;
                     text-align: center;
-                    margin-left: 5%;
                     cursor: pointer;
+                    margin-right: 2%;
+                }
+
+                .button_d:hover {
+                    background-color: rgb(236, 236, 236);
+
+                }
+
+                .button_d:nth-child(2) {
+                    margin-left: 10%;
+                }
+
+                .button_d:nth-child(4) {
+                    margin-right: 10%;
+
                 }
             }
+
 
             .body {
                 border: 1px solid grey;
                 height: 85%;
                 width: 100%;
                 margin-top: 25px;
+
+                .e_lister {
+                    .e_header {
+                        width: 64% !important;
+            }
+                }
+            }
+
+            .over_d {
+                @include mixins.flex(center, center, row);
+                margin-top: 7px;
+
+                .p {
+                    margin-left: 1%;
+
+                }
+            }
+
+            .e_row {
+                margin: 0;
+                width: 90%;
+            }
+
+            .over_d:nth-child(2) {
+                margin-top: 5%;
+
             }
         }
     }

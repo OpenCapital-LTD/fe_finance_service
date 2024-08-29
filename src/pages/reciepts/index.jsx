@@ -48,6 +48,7 @@ const Reciepts = () => {
                     links: l
                 })
             })
+            console.log('some ',res.data)
             setFolders(fls)
         }).catch((err) => {
             pushMessage(err.message, 'error')
