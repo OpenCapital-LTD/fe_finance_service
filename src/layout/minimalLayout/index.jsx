@@ -11,7 +11,7 @@ const MinimalLayout = () => {
             <div className="auth_main">
                 <div className="logo_box">
                     <div className="short_logo"></div>
-                    <p>Expense Tracker</p>
+                    <p>OCA eHub</p>
                 </div>
                 <div className="main_container">
                     <div className="vector"></div>
