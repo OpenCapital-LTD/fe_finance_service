@@ -24,7 +24,7 @@ const AddExpenseRules = () => {
         const roles = gHead.roles.filter(l => [...rolesList].includes(l.name)).map(l => l.id)
         setLoading(true)
         actionRequest({
-            endPoint: `${appConfig.api}settings/rules`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}settings/rules`, params: {
                 name,
                 roles,
                 limit,

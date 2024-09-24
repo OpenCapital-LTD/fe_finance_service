@@ -23,7 +23,7 @@ const Roles = () => {
     const { messageType, response, pushMessage } = usePushMessage()
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/permissions` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/permissions` }).then((res) => {
             addGHead('permissions', res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -31,7 +31,7 @@ const Roles = () => {
             setLoading(false)
         })
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/roles` }).then((res) => {
             setRoles(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -46,7 +46,7 @@ const Roles = () => {
         setLoading(true)
         if (!role || permissionList.size == 0) return pushMessage('missings roles or permissions')
         actionPostRequest({
-            endPoint: `${appConfig.api}settings/roles`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}settings/roles`, params: {
                 name: role,
                 edit:true,
                 permissions: [...permissionList]

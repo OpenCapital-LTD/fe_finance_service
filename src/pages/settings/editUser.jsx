@@ -36,14 +36,14 @@ const EditUser = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/roles` }).then((res) => {
             setRoleList(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api}settings/countries` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/countries` }).then((res) => {
             setCountryList(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')

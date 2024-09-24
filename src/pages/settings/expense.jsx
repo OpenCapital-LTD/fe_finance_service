@@ -17,14 +17,14 @@ const ExpenseRules = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/categories` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/categories` }).then((res) => {
             console.log('categories  ;', res)
             addGHead('categories', res.data)
 
         }).catch((err) => {
             pushMessage(err.message, 'error')
         })
-        actionRequest({ endPoint: `${appConfig.api}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/roles` }).then((res) => {
             console.log('roles  ;', res)
             addGHead('roles', res.data)
 
@@ -33,7 +33,7 @@ const ExpenseRules = () => {
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api}settings/rules` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/rules` }).then((res) => {
 
             console.log('roles  ;', res)
             setRules(res.data)

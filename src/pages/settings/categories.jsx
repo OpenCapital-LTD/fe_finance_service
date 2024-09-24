@@ -26,7 +26,7 @@ const Categories = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/countries` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/countries` }).then((res) => {
             console.log(res)
             addGHead('offices', res.data)
 
@@ -40,7 +40,7 @@ const Categories = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/categories` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/categories` }).then((res) => {
             console.log(res)
             addGHead('categories', res.data)
             setCategories(res.data)

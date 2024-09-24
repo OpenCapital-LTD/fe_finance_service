@@ -16,14 +16,14 @@ const Settings = () => {
     const { gHead, addGHead } = useGiraf()
     const { messageType, response, pushMessage } = usePushMessage()
     const [loading, setLoading] = useState(false)
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState([])
     const { actionRequest } = useGetApi()
     const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/users` }).then((res) => {
-            console.log(res)
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/user/search` }).then((res) => {
+            console.log('here is the res : ',res.data)
             setUsers(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -61,7 +61,8 @@ const Settings = () => {
                     <p>Status</p>
                 </div>
                 {
-                    users && users.map(l => {
+                    users && [...users].map(l => {
+                        // l.forEach(k=>console.log('here is k : ',k))
                         return (
 
                             <div key={l.id} className="lister_row">
@@ -70,7 +71,7 @@ const Settings = () => {
                                     addGHead('edit_user', true)
                                     addGHead('focused_user', l)
                                 }}>
-                                    <div className="init">{`${l.firstName[0]}${l.lastName[0]}`}</div>
+                                    <div className="init">{`${l?.firstName[0]}${l?.lastName[0]}`}</div>
                                     <div className="desc">
                                         <p>{`${l.firstName} ${l.lastName}`}</p>
                                         <p className='greyed'>{l.email}</p>

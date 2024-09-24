@@ -28,7 +28,7 @@ const AddUser = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/countries` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/countries` }).then((res) => {
             console.log(res)
             setCountries(res.data)
 
@@ -38,7 +38,7 @@ const AddUser = () => {
             setLoading(false)
         })
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/roles` }).then((res) => {
             console.log(res)
             setPl(res.data)
 
@@ -54,7 +54,7 @@ const AddUser = () => {
         setLoading(true)
         if (!email || !firstName || !lastName || !country || permissionList.size == 0) return pushMessage('missings roles or permissions')
         actionPostRequest({
-            endPoint: `${appConfig.api}settings/users`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}accounts/users`, params: {
                 email,
                 firstName,
                 lastName,

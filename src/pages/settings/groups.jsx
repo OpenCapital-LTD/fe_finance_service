@@ -26,7 +26,7 @@ const Groups = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/countries` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/countries` }).then((res) => {
             console.log(res)
             setCountries(res.data)
 
@@ -43,7 +43,7 @@ const Groups = () => {
         setLoading(true)
 
         actionPostRequest({
-            endPoint: `${appConfig.api}settings/countries`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}accounts/countries`, params: {
                 name,
                 parent,
                 currency,

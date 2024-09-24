@@ -40,7 +40,7 @@ const AddCategories = () => {
         setLoading(true)
 
         actionRequest({
-            endPoint: `${appConfig.api}settings/categories`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}settings/categories`, params: {
                 name,
                 parent,
                 isSub,

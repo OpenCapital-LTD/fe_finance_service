@@ -20,7 +20,7 @@ const AddRole = () => {
         setLoading(true)
         if (!role || permissionList.size == 0) return pushMessage('missings roles or permissions')
         actionRequest({
-            endPoint: `${appConfig.api}settings/roles`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}settings/roles`, params: {
                 name: role,
                 type,
                 permissions: [...permissionList]

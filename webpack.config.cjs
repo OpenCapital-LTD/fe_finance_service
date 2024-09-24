@@ -35,7 +35,7 @@ module.exports = {
       name: 'fe_expense_service',
       filename: 'remoteEntry.js', // Name of the remote entry file
       remotes: {
-        fe_projects_service: 'fe_projects_service@https://oca-project-tracker.vercel.app/remoteEntry.js', // Remote module and its URL
+        fe_projects_service: 'fe_projects_service@http://localhost:3001/remoteEntry.js', // Remote module and its URL
       },
       exposes: {
         './user_setting': './src/pages/settings/settings_entry.jsx',
