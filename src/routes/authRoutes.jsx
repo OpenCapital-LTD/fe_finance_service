@@ -1,3 +1,4 @@
+import React from 'react'
 import { element } from "prop-types";
 import MainLayout from "../layout/mainlayout";
 import Login from "../pages/authentication/login";

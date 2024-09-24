@@ -1,5 +1,6 @@
 // project import
 // import pages from './pages';
+import React from 'react'
 import { DashboardOutlined, MenuOutlined, Receipt, SettingsOutlined } from '@mui/icons-material';
 import dashboard from './dashboard';
 import { DashOutlined } from '@ant-design/icons';

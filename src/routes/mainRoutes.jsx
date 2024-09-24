@@ -1,4 +1,5 @@
-import { lazy } from 'react';
+
+import React, { lazy } from 'react';
 import MainLayout from '../layout/mainlayout'
 import Loadable from './../components/loadable'
 import { element } from 'prop-types';

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import '../../../assets/styles/drawer.scss'
 import settings_menu from '../../../menu-items/settigns'
 import { useNavigate } from 'react-router-dom'
@@ -23,7 +23,8 @@ const CustomizeDrawer = () => {
                                     }}
                                         onClick={() => {
                                             setSelected(k.title)
-                                            const url = '/settings' + k.url
+                                            const url =  k.url
+                                            // const url = '/settings' + k.url
                                             navigate(url)
                                         }}
                                     >{k.title}</p>

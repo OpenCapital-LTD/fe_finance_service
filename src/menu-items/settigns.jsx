@@ -6,13 +6,13 @@ const settings_menu = {
             children: [
                 {
                     title: 'Users',
-                    url: '/users',
+                    url: 'users',
                 }, {
                     title: 'Country Office',
-                    url: '/office',
+                    url: 'office',
                 },  {
                     title: 'Roles',
-                    url: '/roles',
+                    url: 'roles',
                 }
             ]
         },
@@ -21,13 +21,13 @@ const settings_menu = {
             children: [
                 {
                     title: 'Categories',
-                    url: '/category',
+                    url: 'category',
                 }, {
                     title: 'Projects',
-                    url: '/',
+                    url: '.',
                 }, {
                     title: 'Custom Fields',
-                    url: '/',
+                    url: '.',
                 }
             ]
         },{
@@ -35,13 +35,13 @@ const settings_menu = {
             children: [
                 {
                     title: 'Approval flow',
-                    url: '/',
+                    url: '.',
                 }, {
                     title: 'Expense rules',
-                    url: '/expense_rules',
+                    url: 'expense_rules',
                 }, {
                     title: 'Reject Reasons',
-                    url: '/',
+                    url: '.',
                 }
             ]
         },
