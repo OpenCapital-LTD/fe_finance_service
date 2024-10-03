@@ -19,11 +19,12 @@ const Roles = () => {
     const [loading, setLoading] = useState(false)
     const [roles, setRoles] = useState([])
     const [permissionList, setPermissionList] = useState([])
+    const [apps, setApps] = useState([])
     const [role, setRole] = useState('')
     const { messageType, response, pushMessage } = usePushMessage()
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/permissions` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/permissions` }).then((res) => {
             addGHead('permissions', res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -31,7 +32,15 @@ const Roles = () => {
             setLoading(false)
         })
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/apps` }).then((res) => {
+            addGHead('apps', res.data)
+        }).catch((err) => {
+            pushMessage(err.message, 'error')
+        }).finally(() => {
+            setLoading(false)
+        })
+        setLoading(true)
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/roles` }).then((res) => {
             setRoles(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -44,11 +53,15 @@ const Roles = () => {
 
     const postRole = () => {
         setLoading(true)
-        if (!role || permissionList.size == 0) return pushMessage('missings roles or permissions')
+        if (!role || permissionList.size == 0 || apps.size == 0) return pushMessage('missings roles or permissions')
+        let aps = gHead.apps?.filter(d => {
+            return [...apps].includes(d?.name)
+        }).map(l => l.id)
         actionPostRequest({
-            endPoint: `${appConfig.api.AUTH_URL}settings/roles`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}accounts/roles`, params: {
                 name: role,
-                edit:true,
+                edit: true,
+                apps: aps,
                 permissions: [...permissionList]
             }
         }).then(res => {
@@ -78,7 +91,12 @@ const Roles = () => {
                         setRole(e.target.value)
                     }} />
                 </div>
+                <p style={{
+                    fontSize: '12px',
+                    marginTop: '10px'
+                }}>Permissions</p>
                 <div className='role_list'>
+
                     {[...permissionList].map((p, x) => {
                         return (
                             <div >
@@ -91,6 +109,41 @@ const Roles = () => {
                             </div>
                         )
                     })}
+                </div>
+                <p style={{
+                    fontSize: '12px',
+                    marginTop: '10px'
+                }}>Apps</p>
+                <div className='role_list'>
+                    {[...apps].map((p, x) => {
+                        return (
+                            <div >
+                                <p>{p}</p>
+                                <CloseOutlined className='close' onClick={() => {
+                                    let new_arr = [...apps]
+                                    new_arr.splice(x, 1)
+                                    setApps(new Set([...new_arr]))
+                                }} />
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className='input'>
+                    <p>Apps</p>
+                    <select onChange={(e) => {
+                        setApps(l => {
+
+                            return new Set([...l, e.target.value])
+                        })
+                    }}>
+                        <option selected disabled>~ select apps ~</option>
+                        {gHead.apps && gHead.apps.map(l => {
+                            return (
+                                <option value={l?.name}>{l?.name}</option>
+                            )
+                        })}
+
+                    </select>
                 </div>
                 <div className='input'>
                     <p>Permissions</p>
@@ -131,11 +184,12 @@ const Roles = () => {
 
                     <div className='lister' onClick={() => {
                         addGHead("editGroup", true)
-                        setRole(l.name)
+                        setRole(l?.name)
                         setPermissionList(Object.keys(l.Acls).filter(k => l.Acls[k] === true))
+                        setApps(l.AppAcls.map(d => d.App?.name))
                     }}>
-                        <p>{l.name}</p>
-                        <p>1</p>
+                        <p>{l?.name}</p>
+                        <p>_ _ _</p>
                         <p>{shortenWord(Object.keys(l.Acls).filter(k => l.Acls[k] === true).join(', '), 30)}</p>
                     </div>
                 )

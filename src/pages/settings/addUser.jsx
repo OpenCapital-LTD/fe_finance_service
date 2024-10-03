@@ -54,7 +54,7 @@ const AddUser = () => {
         setLoading(true)
         if (!email || !firstName || !lastName || !country || permissionList.size == 0) return pushMessage('missings roles or permissions')
         actionPostRequest({
-            endPoint: `${appConfig.api.AUTH_URL}accounts/users`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}accounts/user`, params: {
                 email,
                 firstName,
                 lastName,

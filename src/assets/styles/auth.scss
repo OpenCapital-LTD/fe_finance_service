@@ -10,8 +10,9 @@
     background: linear-gradient(to right, const.$blue_theme 40%, rgb(217, 227, 231) 40%);
     border-radius: 0;
     height: 100%;
+    border: 2px solid red;
     width: 100%;
-    
+
 
     .auth_main {
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -19,7 +20,7 @@
         width: 50%;
         background: white;
         padding: 40px;
-
+        border: 2px solid red;
         .logo_box {
             @include mixins.flex(flex-start, center, row);
             gap: 10px;
@@ -34,6 +35,13 @@
                 font-weight: 700;
                 letter-spacing: 2px;
                 font-size: 15px;
+            }
+
+            border: 2px solid red;
+
+            .ehub_line {
+                font-size: 10px;
+                border: 2px solid red;
             }
         }
     }
@@ -57,6 +65,7 @@
         }
 
     }
+
 }
 
 .login {
@@ -65,11 +74,13 @@
     height: 95%;
     border: 1px solid const.$light_orange_theme;
     padding: 5%;
-    h4{
+
+    h4 {
         margin-top: 15%;
-        color:rgb(97, 97, 97)
+        color: rgb(97, 97, 97)
     }
-    .input_holder{
+
+    .input_holder {
         border: 1px solid rgb(218, 218, 218);
         border-radius: 5px;
         margin-top: 20px
@@ -91,9 +102,10 @@
         .l_input {
             font-size: 12px;
             width: 100%;
+
             input {
                 outline: none;
-                background-color:transparent;
+                background-color: transparent;
                 border: 0;
                 font-size: 11px;
                 width: 100%;
@@ -101,7 +113,8 @@
 
         }
     }
-    .signin_butt{
+
+    .signin_butt {
         @include mixins.flex(center, center, row);
         border: 1px solid const.$light_orange_theme;
         padding: 10px;
@@ -110,7 +123,8 @@
         font-weight: bold;
         cursor: pointer;
     }
-    .google{
+
+    .google {
         background: url("../images/google.png");
         background-size: 40%;
         background-position: center;

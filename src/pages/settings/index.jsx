@@ -78,7 +78,7 @@ const Settings = () => {
                                     </div>
                                 </div>
                                 <div className='g'>Open Capital</div>
-                                <div className='r'>{shortenWord([...(new Set(l.UserRoles.map(l => l.Role.name)))].join(', '), 25)}</div>
+                                <div className='r'>{shortenWord([...(new Set(l.UserRoles.map(l => l.Role?.name)))].join(', '), 25)}</div>
                                 <div className='s' onClick={(e) => {
                                     console.log('')
                                 }}>

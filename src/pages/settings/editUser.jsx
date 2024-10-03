@@ -36,14 +36,14 @@ const EditUser = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/roles` }).then((res) => {
             setRoleList(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/countries` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/countries` }).then((res) => {
             setCountryList(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -143,7 +143,7 @@ const EditUser = () => {
                             <div className='desc'>
                                 <p className='p1'>{l.name}</p>
                             </div>
-                            <input type='checkbox' className='check' checked={gHead.user.UserRoles.map(l => l.role_id).includes(l.id)} />
+                            <input type='checkbox' className='check' checked={gHead.focused_user.UserRoles.map(l => l.id).includes(l.id)} />
                         </div>
                     )
                 })}

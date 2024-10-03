@@ -10,6 +10,7 @@ import appConfig from '../../config'
 const AddRole = () => {
     const { gHead, addGHead } = useGiraf()
     const [permissionList, setPermissionList] = useState(new Set([]))
+    const [apps, setApps] = useState(new Set([]))
     const { messageType, response, pushMessage } = usePushMessage()
     const [loading, setLoading] = useState(false)
     const { actionRequest } = usePostApi()
@@ -18,11 +19,15 @@ const AddRole = () => {
 
     const postRole = () => {
         setLoading(true)
-        if (!role || permissionList.size == 0) return pushMessage('missings roles or permissions')
+        if (!role || permissionList.size == 0 || apps.size == 0) return pushMessage('missings roles, apps or permissions')
+        let aps = gHead.apps?.filter(d => {
+            return [...apps].includes(d.name)
+        }).map(l=>l.id)
         actionRequest({
-            endPoint: `${appConfig.api.AUTH_URL}settings/roles`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}accounts/roles`, params: {
                 name: role,
                 type,
+                apps: aps,
                 permissions: [...permissionList]
             }
         }).then(res => {
@@ -53,7 +58,48 @@ const AddRole = () => {
                             setRole(e.target.value)
                         }} />
                     </div>
-                    <div className='holder'>
+                    <div className='holder two'>
+
+                        <select style={{
+                            marginTop: '2%'
+                        }} onChange={(e) => {
+                            setType(e.target.value)
+                        }}>
+                            <option selected disabled>~ Role Type ~</option>
+                            <option value={'USER'}> user </option>
+                            <option value={'ADMIN'}> admin </option>
+                            <option value={'APPROVER'}> approver </option>
+
+                        </select>
+
+                        <p>App(s)</p>
+                        <div className='role_list'>
+                            {[...apps].map((p, x) => {
+                                return (
+                                    <div >
+                                        <p>{p}</p>
+                                        <CloseOutlined className='close' onClick={() => {
+                                            let new_arr = [...apps]
+                                            new_arr.splice(x, 1)
+                                            setApps(new Set([...new_arr]))
+                                        }} />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <select onChange={(e) => {
+                            setApps(l => {
+                                return new Set([...l, e.target.value])
+                            })
+                        }}>
+                            <option selected disabled>~ select apps ~</option>
+                            {gHead.apps && gHead.apps.map(l => {
+                                return (
+                                    <option value={l.name}>{l.name}</option>
+                                )
+                            })}
+                        </select>
+
                         <p>Permissions</p>
                         <div className='role_list'>
                             {[...permissionList].map((p, x) => {
@@ -81,18 +127,6 @@ const AddRole = () => {
                                     <option value={l.key}>{l.key}</option>
                                 )
                             })}
-                        </select>
-
-                        <select style={{
-                            marginTop: '2%'
-                        }} onChange={(e) => {
-                            setType(e.target.value)
-                        }}>
-                            <option selected disabled>~ Role Type ~</option>
-                            <option value={'USER'}> user </option>
-                            <option value={'ADMIN'}> admin </option>
-                            <option value={'APPROVER'}> approver </option>
-
                         </select>
 
 

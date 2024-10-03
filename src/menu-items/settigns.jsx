@@ -6,7 +6,7 @@ const settings_menu = {
             children: [
                 {
                     title: 'Users',
-                    url: 'users',
+                    url: '.',
                 }, {
                     title: 'Country Office',
                     url: 'office',
