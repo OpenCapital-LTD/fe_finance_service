@@ -23,7 +23,7 @@ const AddGroup = () => {
         setLoading(true)
 
         actionRequest({
-            endPoint: `${appConfig.api.AUTH_URL}settings/countries`, params: {
+            endPoint: `${appConfig.api.AUTH_URL}accounts/countries`, params: {
                 name,
                 office,
                 currency,
