@@ -12,7 +12,7 @@
         height: fit-content;
         margin-bottom: 60px;
 
-        h2{
+        h2 {
             // float: left;
             width: 50px;
         }
@@ -58,17 +58,22 @@
 
     .lister {
         .lister_header {
+
             @include mixins.flex(flex-start, flex-start, row);
             border-bottom: 1px solid lightgrey;
-            margin-left: 5%;
-            padding-left: 10%;
+            margin-left: 8%;
             margin-right: 5%;
+            min-width: 69%;
+            width: 60%;
+            border-radius: 0;
+            padding-left: 2%;
+            padding-bottom: 10px;
 
             p {
-                width: 30%;
+                min-width: 31%;
                 font-size: 14px;
                 margin-top: 40px;
-            }
+        }
         }
 
         .lister_row {
@@ -83,11 +88,12 @@
             .r,
             .s {
                 padding-right: 20px;
-                width: 35%;
+                width: 22%;
+
             }
 
             .avator {
-                @include mixins.flex(center, center, row);
+                @include mixins.flex(flex-start, center, row);
 
                 .init {
 
@@ -156,7 +162,7 @@
     width: 74%;
     padding-left: 20px;
     padding-right: 20px;
-    border:transparent;
+    border: transparent;
 
 
     .header {
@@ -319,7 +325,7 @@
             .holder {
                 .role_list {
                     margin-top: 0;
-                    
+
                 }
 
             }

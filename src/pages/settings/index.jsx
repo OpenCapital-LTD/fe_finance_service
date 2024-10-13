@@ -1,4 +1,4 @@
-import { Button, Switch } from '@mui/material'
+import { Button, Switch, Tooltip } from '@mui/material'
 import '../../assets/styles/settings.scss'
 import { AddOutlined, SearchOutlined } from '@mui/icons-material'
 import AddUser from './addUser'
@@ -65,12 +65,13 @@ const Settings = () => {
                         // l.forEach(k=>console.log('here is k : ',k))
                         return (
 
-                            <div key={l.id} className="lister_row">
+                            <div key={l.id} className="lister_row" onClick={() => {
+                                addGHead('edit_user', true)
+                                addGHead('ref_edit_user', true)
+                                addGHead('focused_user', l)
+                            }}>
 
-                                <div className="avator" onClick={() => {
-                                    addGHead('edit_user', true)
-                                    addGHead('focused_user', l)
-                                }}>
+                                <div className="avator" >
                                     <div className="init">{`${l?.firstName[0]}${l?.lastName[0]}`}</div>
                                     <div className="desc">
                                         <p>{`${l.firstName} ${l.lastName}`}</p>
@@ -78,7 +79,9 @@ const Settings = () => {
                                     </div>
                                 </div>
                                 <div className='g'>Open Capital</div>
-                                <div className='r'>{shortenWord([...(new Set(l.UserRoles.map(l => l.Role?.name)))].join(', '), 25)}</div>
+                                <Tooltip title={l.UserRoles?.map(l=>l.Role?.name).join(', ')}>
+                                <div className='r'>{shortenWord([...(new Set(l.UserRoles?.map(l => l.Role?.name)))].join(', '), 25)}</div>
+                                </Tooltip>
                                 <div className='s' onClick={(e) => {
                                     console.log('')
                                 }}>

@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
-
+import Cookies from 'js-cookie'
 
 const Giraf = createContext(undefined)
 const GirafProvider = ({ children }) => {
-    const [gHead, setGHead] = useState({})
+    const token = Cookies.get('auth_token')
+    const [gHead, setGHead] = useState({
+        auth_token:token
+    })
     const addGHead = (key, ref) => {
         setGHead((prevG) => ({
             ...prevG,

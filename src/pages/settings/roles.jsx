@@ -12,6 +12,7 @@ import MessageBox from '../../components/message'
 import Loading from '../../components/loading'
 import { shortenWord } from '../../BFF/utils'
 import usePostApi from '../../hooks/postapi'
+import { Tooltip } from '@mui/material'
 const Roles = () => {
     const { gHead, addGHead } = useGiraf()
     const { actionRequest } = useGetApi()
@@ -174,7 +175,7 @@ const Roles = () => {
             {gHead.addRole == true && <AddRole />}
             <div className='lister' >
                 <p>Role Name</p>
-                <p>Users</p>
+                <p>Apps</p>
                 <p>Permissions</p>
             </div>
 
@@ -189,8 +190,12 @@ const Roles = () => {
                         setApps(l.AppAcls.map(d => d.App?.name))
                     }}>
                         <p>{l?.name}</p>
-                        <p>_ _ _</p>
-                        <p>{shortenWord(Object.keys(l.Acls).filter(k => l.Acls[k] === true).join(', '), 30)}</p>
+                        <Tooltip title={l.AppAcls.map(l => l.App.name).join(', ')}>
+                            <p>{shortenWord(l.AppAcls.map(l => l.App.name).join(', '), 30)}</p>
+                        </Tooltip>
+                        <Tooltip title={Object.keys(l.Acls).filter(k => l.Acls[k] === true).join(', ')}>
+                            <p>{shortenWord(Object.keys(l.Acls).filter(k => l.Acls[k] === true).join(', '), 30)}</p>
+                        </Tooltip>
                     </div>
                 )
 
