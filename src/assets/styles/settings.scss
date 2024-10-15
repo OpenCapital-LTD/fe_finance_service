@@ -57,6 +57,8 @@
     }
 
     .lister {
+        height: 40%;
+        overflow: scroll;
         .lister_header {
 
             @include mixins.flex(flex-start, flex-start, row);
