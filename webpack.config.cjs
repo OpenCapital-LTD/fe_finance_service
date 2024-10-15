@@ -69,6 +69,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
+      favicon: './oca_short_logo.png'
+
     }),
   ],
   resolve: {
@@ -100,6 +102,13 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource', // Add loader for images and SVGs
+      },
+      {
+        test: /\.(xlsx|xls|csv)$/i,
+        type: 'asset/resource', // This ensures the file is bundled correctly
+        generator: {
+          filename: '[name][ext]',  // Retains original file name
+        },
       },
     ],
   },

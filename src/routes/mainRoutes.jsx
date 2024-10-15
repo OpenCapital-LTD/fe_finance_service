@@ -1,21 +1,15 @@
 
 import React, { lazy } from 'react';
 import MainLayout from '../layout/mainlayout'
-import Loadable from './../components/loadable'
-import { element } from 'prop-types';
-import Menu from '../pages/menu_w';
 import DashboardDefault from '../pages/dashboard';
 import Expense from '../pages/expenses';
 import Reciepts from '../pages/reciepts';
 import Settings from '../pages/settings';
 import Groups from '../pages/settings/groups';
-import Office from '../pages/settings/offices';
 import Roles from '../pages/settings/roles';
 import BulkUploads from '../pages/expenses/bulkuploads';
 import Categories from '../pages/settings/categories';
 import ExpenseRules from '../pages/settings/expense';
-// const DashboardDefault = Loadable(lazy(() => import('./../pages/dashboard')));
-// const Menu = Loadable(lazy(()=>import('./../pages/menu_w')))
 
 const MainRoutes = {
   path: '/',
@@ -29,7 +23,7 @@ const MainRoutes = {
       path: '/expense',
       element: <Expense />
     },
-    
+
     {
       path: '/bulk',
       element: <BulkUploads />
@@ -45,7 +39,7 @@ const MainRoutes = {
       // element: <Settings />,
       children: [
         {
-          path: '/settings/users',
+          path: '/settings',
           element: <Settings />,
 
         }, {
@@ -61,12 +55,29 @@ const MainRoutes = {
         }, {
           path: '/settings/expense_rules',
           element: <ExpenseRules />,
+        },
+        {
+          path: '/settings/blank',
+          element: <div style={{
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+              width:'75%',
+            height:'100%',
+          }}>
+            <div style={{
+              background:'white',
+              minHeight:'80%',
+              minWidth:'80%',
+              borderRadius:'5px'
+            }}></div>
+          </div>
         }
       ]
     },
     {
-      path:'*',
-      element:<DashboardDefault/>
+      path: '*',
+      element: <DashboardDefault />
     }
 
   ]

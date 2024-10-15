@@ -23,14 +23,14 @@ const MainLayout = () => {
    
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/countries` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/countries` }).then((res) => {
             addGHead('countries', res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api}settings/categories` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/categories` }).then((res) => {
             addGHead('categories', res.data)
 
         }).catch((err) => {
@@ -38,7 +38,7 @@ const MainLayout = () => {
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api}settings/projects` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/projects` }).then((res) => {
             addGHead('projects', res.data)
 
         }).catch((err) => {
@@ -47,7 +47,7 @@ const MainLayout = () => {
             setLoading(false)
         })
 
-        actionRequest({ endPoint: `${appConfig.api}expense/user` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}expense/user` }).then((res) => {
             addGHead('user_expenses', res.data)
 
         }).catch((err) => {
@@ -57,7 +57,7 @@ const MainLayout = () => {
         })
 
 
-        actionRequest({ endPoint: `${appConfig.api}tasks/user` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}tasks/user` }).then((res) => {
             addGHead('user_tasks', res.data)
 
         }).catch((err) => {

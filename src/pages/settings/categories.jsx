@@ -40,7 +40,7 @@ const Categories = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/categories` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/categories` }).then((res) => {
             console.log(res)
             addGHead('categories', res.data)
             setCategories(res.data)

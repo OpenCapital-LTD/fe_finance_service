@@ -25,7 +25,7 @@ const Reciepts = () => {
         addGHead('toolbar', false)
         console.log('expenses', gHead.user_expenses)
 
-        actionRequest({ endPoint: `${appConfig.api}expense/user` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}expense/user` }).then((res) => {
             addGHead('user_expenses', res.data)
 
             const files = res.data?.filter(l => l.file_url) || []

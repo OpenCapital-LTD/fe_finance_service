@@ -2,7 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useGiraf } from "../giraff";
 
-const API_KEY = 'import.meta.env.VITE_API_KEY;'
+const API_KEY = 'import.meta.env.VITE_API_KEY'
+// const API_KEY = appConfig.api.API_KEY
 
 function useGetApi() {
     const [data, setData] = useState(null);

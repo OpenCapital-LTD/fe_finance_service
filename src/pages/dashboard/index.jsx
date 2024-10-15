@@ -48,7 +48,7 @@ const DashboardDefault = () => {
         setLoading(true)
 
         actionPostRequest({
-            endPoint: `${appConfig.api}tasks/delete`, params: {
+            endPoint: `${appConfig.api.BASE_URL}tasks/delete`, params: {
                 id
             }
         }).then((res) => {

@@ -17,23 +17,28 @@ const ExpenseRules = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/categories` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/categories` }).then((res) => {
             console.log('categories  ;', res)
             addGHead('categories', res.data)
 
         }).catch((err) => {
             pushMessage(err.message, 'error')
         })
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/roles` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/roles` }).then((res) => {
             console.log('roles  ;', res)
-            addGHead('roles', res.data)
+            let d = res.data?.filter(k=>{
+                console.log(k.AppAcls)
+                if(k.AppAcls.find(a=>a.App.nav_path == 'el_service')) return true
+                return false
+            })
+            addGHead('roles', d)
 
         }).catch((err) => {
             pushMessage(err.message, 'error')
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}settings/rules` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/rules` }).then((res) => {
 
             console.log('roles  ;', res)
             setRules(res.data)

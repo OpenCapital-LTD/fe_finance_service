@@ -23,7 +23,7 @@ const Tasks = () => {
         if (!name || !due_date) return pushMessage('you must provide both name and date')
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}tasks`, params: {
+            endPoint: `${appConfig.api.BASE_URL}tasks`, params: {
                 name,
                 due_date
             }

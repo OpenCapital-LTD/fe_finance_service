@@ -29,9 +29,8 @@ const Header = () => {
             </div>
             <div className="action_sec">
                 <Tooltip title='single upload'>
-
                     <div className="action_but" onClick={() => {
-                        navigate('/')
+                        navigate('.')
                         addGHead("toolbar", true)
                         addGHead("focused_expense", null)
                         addGHead('filer', true)
@@ -47,7 +46,7 @@ const Header = () => {
 
                     <div className="action_but" onClick={() => {
                         addGHead("toolbar", false)
-                        navigate('/bulk')
+                        navigate('bulk')
                     }}>
                         <div className="action_atom">
                             <HiOutlineClipboardDocumentList />

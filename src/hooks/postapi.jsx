@@ -4,6 +4,7 @@ import { useGiraf } from "../giraff";
 
 
 const API_KEY = 'import.meta.env.VITE_API_KEY'
+// const API_KEY = appcon
 
 function usePostApi() {
     //   const { endPoint, params } = apiProps;

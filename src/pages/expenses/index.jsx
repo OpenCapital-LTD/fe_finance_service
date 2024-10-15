@@ -29,14 +29,14 @@ const Expense = () => {
     }
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}expense` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}expense` }).then((res) => {
             setExpenses(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
         }).finally(() => {
             setLoading(false)
         })
-        actionRequest({ endPoint: `${appConfig.api}settings/users/approvers` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.AUTH_URL}accounts/users/approvers` }).then((res) => {
             console.log('res')
             addGHead('approvers', res.data)
         }).catch((err) => {
@@ -76,7 +76,7 @@ const Expense = () => {
                     backgroundColor: categ === 'todo' ? '#c47c1018' : 'transparent',
                     color: categ === 'todo' ? '#2D3E50' : 'grey'
                 }}>TO DO</div>
-                {(gHead.user_role.includes('APPROVER')) && <div onClick={() => {
+                {(gHead.user_role?.includes('APPROVER')) && <div onClick={() => {
                     switchCateg('folder')
 
                 }} className='categ_act categ_act_focused' style={{
@@ -86,7 +86,7 @@ const Expense = () => {
 
             </div>
             <p className='categ_act filter'>+ Add Filter</p>
-            <p className='caller'>{expenses.length} expenses, Total {expenses.filter(a => a.amount).reduce((a, b) => parseInt(b.amount) + a, 0)} <span style={{
+            <p className='caller'>{expenses.length} expenses, Total {expenses.filter(a => a.amount) !=0 ? expenses.filter(a => a.amount)?.reduce((a, b) => parseInt(b.amount) + a, 0) : '0'} <span style={{
                 fontSize: '10px'
             }}>KES</span></p>
             <div className='main_container'>

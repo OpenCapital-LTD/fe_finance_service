@@ -14,26 +14,26 @@ import { CiReceipt } from 'react-icons/ci';
 const menuItems = {
   items: [{
     title: 'Dashboard ',
-    url: '/',
+    url: '.',
     icon: <IoHomeOutline size={23} />
   }, {
     title: 'Expense',
-    url: '/expense',
+    url: './expense',
     icon: <TbGraph size={23} />
   }, {
     title: 'Receipts',
-    url: '/reciepts',
+    url: './reciepts',
     icon: <TbReceipt size={23} />
   }
     , {
     title: 'Reports',
-    url: '/expense',
+    url: './expense',
     icon: <TbReportSearch size={23} />
   }
 
     , {
     title: 'Settings',
-    url: '/settings/users',
+    url: './settings',
     icon: <SettingsOutlined size={23} />
   }]
 };
@@ -42,20 +42,20 @@ const menuItems = {
 const menuItemsUser = {
   items: [{
     title: 'Dashboard ',
-    url: '/',
+    url: '.',
     icon: <IoHomeOutline size={23} />
   }, {
     title: 'Expense',
-    url: '/expense',
+    url: './expense',
     icon: <TbGraph size={23} />
   }, {
     title: 'Receipts',
-    url: '/reciepts',
+    url: './reciepts',
     icon: <TbReceipt size={23} />
   }
     , {
     title: 'Reports',
-    url: '/expense',
+    url: './expense',
     icon: <TbReportSearch size={23} />
   }
   ]

@@ -34,7 +34,7 @@ const Folders = () => {
 
     useEffect(() => {
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}folders` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}folders` }).then((res) => {
             setFolders(res.data)
             console.log(res.data)
         }).catch((err) => {
@@ -60,7 +60,7 @@ const Folders = () => {
         const now = new Date()
         const month = getDate(now).month
         actionPostRequest({
-            endPoint: `${appConfig.api}folders`, params: {
+            endPoint: `${appConfig.api.BASE_URL}folders`, params: {
                 month,
                 country
             }
@@ -77,7 +77,7 @@ const Folders = () => {
     const assignApprover = () => {
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}folders/forward`, params: {
+            endPoint: `${appConfig.api.BASE_URL}folders/forward`, params: {
                 id: folder.id,
                 assigned
             }
@@ -99,7 +99,7 @@ const Folders = () => {
     const deleteFolder = () => {
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}folders/delete`, params: {
+            endPoint: `${appConfig.api.BASE_URL}folders/delete`, params: {
                 id: itemMenuId
             }
         }).then((res) => {
@@ -117,7 +117,7 @@ const Folders = () => {
     const removeItemFromFolder = (id) => {
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}folders/item/remove`, params: {
+            endPoint: `${appConfig.api.BASE_URL}folders/item/remove`, params: {
                 id
             }
         }).then((res) => {
@@ -144,7 +144,7 @@ const Folders = () => {
         })
 
         actionPostRequest({
-            endPoint: `${appConfig.api}expense/status/bulk`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense/status/bulk`, params: {
                 records
             }
         }).then((res) => {
@@ -166,7 +166,7 @@ const Folders = () => {
     const disburseExpense = () => {
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}expense/status/bulk`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense/status/bulk`, params: {
                 status: 'REIMBURSED',
                 id: recordId
             }

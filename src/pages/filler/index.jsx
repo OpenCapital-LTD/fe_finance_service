@@ -64,7 +64,7 @@ const Filler = () => {
         setErrorList(prev => prev.filter(u => u != 'country'))
         setFocusedCountry(d)
 
-        actionRequest({ endPoint: `${appConfig.api}folders` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}folders` }).then((res) => {
             setFolders(res.data)
         }).catch((err) => {
             pushMessage(err.message, 'error')
@@ -75,13 +75,15 @@ const Filler = () => {
     }, [])
 
     const getRules = (id) => {
-        actionRequest({ endPoint: `${appConfig.api}settings/rules/category`, params: { id } }).then((res) => {
+        console.log('here is teh id',id)
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/rules/category`, params: { id } }).then((res) => {
             const rulesArray = []
+            console.log('here just found nothing', res)
             res.data.map(l => {
                 l.RuleRoles.map(r => {
                     let d = {
                         id: l.categoriesId,
-                        for: r.Roles.id,
+                        for: r.role,
                         limit: l.limit
                     }
                     rulesArray.push(d)
@@ -154,7 +156,7 @@ const Filler = () => {
         const report_period = `${rp_month}, ${rp_year}`
         const time_code = code
         actionPostRequest({
-            endPoint: `${appConfig.api}expense`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense`, params: {
                 report_period,
                 time_code,
                 country,
@@ -234,7 +236,7 @@ const Filler = () => {
         let { ntry, ...p2 } = p1
         if (!p.category) pv = p1
         actionPostRequest({
-            endPoint: `${appConfig.api}expense/draft`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense/draft`, params: {
                 curr_value,
                 value: p_keys.length,
                 due_date,
@@ -291,7 +293,7 @@ const Filler = () => {
     const approveExpense = () => {
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}expense/status`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense/status`, params: {
                 status: 'APPROVED',
                 id: recordId
             }
@@ -311,7 +313,7 @@ const Filler = () => {
         setLoading(true)
         if (!note) return pushMessage('you need to add a note')
         actionPostRequest({
-            endPoint: `${appConfig.api}expense/status`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense/status`, params: {
                 status: 'REJECTED',
                 id: recordId,
                 note
@@ -331,7 +333,7 @@ const Filler = () => {
     const disburseExpense = () => {
         setLoading(true)
         actionPostRequest({
-            endPoint: `${appConfig.api}expense/status`, params: {
+            endPoint: `${appConfig.api.BASE_URL}expense/status`, params: {
                 status: 'REIMBURSED',
                 id: recordId
             }
@@ -352,7 +354,7 @@ const Filler = () => {
         setLoading(true)
 
         actionPostRequest({
-            endPoint: `${appConfig.api}folders/item`, params: {
+            endPoint: `${appConfig.api.BASE_URL}folders/item`, params: {
                 expenseId: recordId,
                 folderId: folder
             }
@@ -758,7 +760,9 @@ const Filler = () => {
                         <div className='input_atom '>
                             <p className='atom_label '>Expense Description</p>
                             <textarea disabled={disabled} value={description} style={{
-                                border: errList.includes('description') && '1px solid orangered'
+                                border: errList.includes('description') && '1px solid orangered',
+                                backgroundColor:'transparent',
+                                color:'black'
                             }} onChange={(e) => {
                                 setErrorList(prev => prev.filter(u => u != 'description'))
 

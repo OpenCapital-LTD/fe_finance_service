@@ -14,7 +14,7 @@ import appConfig from "../../config"
 import { IoAlertOutline } from "react-icons/io5"
 import { Tooltip } from "@mui/material"
 import { shortenWord } from "../../BFF/utils"
-
+import template from './template.xlsx';
 const BulkUploads = () => {
     const [data, setData] = useState([])
     const { gHead, addGHead } = useGiraf()
@@ -33,7 +33,7 @@ const BulkUploads = () => {
     }, [])
 
     useEffect(() => {
-        actionRequest({ endPoint: `${appConfig.api}settings/rules` }).then((res) => {
+        actionRequest({ endPoint: `${appConfig.api.BASE_URL}settings/rules` }).then((res) => {
             const rulesArray = []
             console.log('ules : ', res.data)
             let rules = [];
@@ -153,7 +153,7 @@ const BulkUploads = () => {
             }
         })
         setLoading(true)
-        actionPostRequest({ endPoint: `${appConfig.api}expense/bulk`, params: record }).then((res) => {
+        actionPostRequest({ endPoint: `${appConfig.api.BASE_URL}expense/bulk`, params: record }).then((res) => {
             console.log(res)
             addGHead('expense_ref', true)
             addGHead('bulk_data', null)
@@ -206,7 +206,7 @@ const BulkUploads = () => {
                         <p>Current : {gHead.fileName} </p>
                         <p>Total : <span style={{
                             fontSize: '10px'
-                        }}>KES</span> {gHead.bulk_data?.filter((l, x) => x > 1).reduce((a, b) => parseInt(a) + parseInt(b[5]))}</p>
+                        }}>KES</span> {gHead.bulk_data?.filter((l, x) => x > 1) != 0 ? gHead.bulk_data?.filter((l, x) => x > 1).reduce((a, b) => parseInt(a) + parseInt(b[5])) : '0'}</p>
 
                     </div>
                     <div className="lister">
@@ -306,7 +306,7 @@ const BulkUploads = () => {
             }} type="file" accept=".xlsx" ></input>
             <div className="temp_download">
                 <i>
-                    <a href="/src/assets/templates/template.xlsx" style={{
+                    <a href={template} style={{
                         textDecoration: 'none',
                         color: 'grey'
                     }} download="template.xlsx">download template</a>

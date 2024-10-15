@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../assets/styles/drawer.scss'
-import settings_menu from '../../../menu-items/settigns'
+import settings_menu, { settings_menu_in_app } from '../../../menu-items/settigns'
 import { useNavigate } from 'react-router-dom'
 
 const CustomizeDrawer = () => {
     const [selected, setSelected] = useState('Users')
+    const [s_menu, setSMenu] = useState(settings_menu)
     const navigate = useNavigate()
+    useEffect(()=>{
+        if(window.location.href.includes('expense_service')){
+            setSMenu(settings_menu_in_app)
+        }
+    },[])
     return (
         <div className='custom_drawer'>
 
-            {settings_menu.items.map(l => {
+            {s_menu.items.map(l => {
                 return (
                     <div className='lister_sect'>
                         <br />

@@ -19,7 +19,7 @@ const Login = () => {
     const actionLogin = () => {
         if (!name || !password) return pushMessage('missing email or password')
         setLoading(true)
-        actionRequest({ endPoint: `${appConfig.api}settings/login`, params: { email: name, password } , hd:{
+        actionRequest({ endPoint: `${appConfig.api.api.BASE_URL}settings/login`, params: { email: name, password } , hd:{
             'x-resource-type':'sign-in'
         }}).then((res) => {
             const token = 'Bearer ' + res.token

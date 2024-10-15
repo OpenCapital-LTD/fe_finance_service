@@ -4,15 +4,11 @@ import React, { useEffect, useState } from "react"
 import { useGiraf } from "../giraff"
 import { useRoutes } from "react-router-dom"
 import MainRoutes from "./mainRoutes"
-import AuthRoutes from "./authRoutes"
 import Cookies from 'js-cookie'
 import { jwtDecode } from "jwt-decode"
 import { LoadingOutlined } from "@ant-design/icons"
-import usePushMessage from "../hooks/pushmessage"
-import useGetApi from "../hooks/getapi"
 
 const ThemeRoutes = () => {
-    const [logedIn, setLogedIn] = useState(false)
     const { gHead, addGHead } = useGiraf()
     const [loading, setLoading] = useState(true)
     useEffect(() => {

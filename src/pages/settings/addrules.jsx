@@ -21,10 +21,10 @@ const AddExpenseRules = () => {
 
     const pushRule = () => {
         if (!name || !limit || [...rolesList].length == 0 || !category) return pushMessage('you must enter all the fields')
-        const roles = gHead.roles.filter(l => [...rolesList].includes(l.name)).map(l => l.id)
+        const roles = gHead.roles.filter(l => [...rolesList].includes(l.name))?.map(l => l.id)
         setLoading(true)
         actionRequest({
-            endPoint: `${appConfig.api.AUTH_URL}settings/rules`, params: {
+            endPoint: `${appConfig.api.BASE_URL}settings/rules`, params: {
                 name,
                 roles,
                 limit,
@@ -66,7 +66,7 @@ const AddExpenseRules = () => {
                     <div className='holder'>
                         <p>Roles</p>
                         <div className='role_list'>
-                            {[...rolesList].map((p, x) => {
+                            {[...rolesList]?.map((p, x) => {
                                 return (
                                     <div >
                                         <p>{p}</p>
@@ -85,7 +85,7 @@ const AddExpenseRules = () => {
                             })
                         }}>
                             <option selected disabled>~ select roles ~</option>
-                            {gHead.roles.map(l => {
+                            {gHead.roles?.map(l => {
                                 return (
                                     <option value={l.name}>{l.name}</option>
                                 )
@@ -99,7 +99,7 @@ const AddExpenseRules = () => {
                             setCategory(e.target.value)
                         }}>
                             <option selected disabled>~ select category ~</option>
-                            {gHead.categories.map(l => {
+                            {gHead.categories?.map(l => {
                                 return (
                                     <option value={l.code}>{l.tag}</option>
                                 )
