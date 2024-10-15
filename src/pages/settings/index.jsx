@@ -72,7 +72,13 @@ const Settings = () => {
                             }}>
 
                                 <div className="avator" >
-                                    <div className="init">{`${l?.firstName[0]}${l?.lastName[0]}`}</div>
+                                    <div className="init" 
+                                   style={{
+                                    backgroundImage: `url('${l.url_image ? l.url_image : l.picture}')`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                }}
+                                    >{!l.url_image && `${l?.firstName[0]}${l?.lastName[0]}`}</div>
                                     <div className="desc">
                                         <p>{`${l.firstName} ${l.lastName}`}</p>
                                         <p className='greyed'>{l.email}</p>

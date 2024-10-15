@@ -89,6 +89,7 @@
             .s {
                 padding-right: 20px;
                 width: 22%;
+                overflow: hidden;
 
             }
 
@@ -96,11 +97,10 @@
                 @include mixins.flex(flex-start, center, row);
 
                 .init {
-
                     background-color: const.$blue_theme;
                     color: white;
-                    height: 40px;
-                    width: 40px;
+                    min-height: 40px;
+                    min-width: 40px;
                     border-radius: 100%;
                     @include mixins.flex(center, center, row)
                 }
@@ -113,6 +113,7 @@
                         color: grey;
                     }
                 }
+
             }
 
             .s {
